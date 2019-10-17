@@ -24,29 +24,28 @@ Client application is responsible for synchronization. Cloud knows nothing about
 
 Copy 2 times this repository, one for client and one for cloud.
 
-Cloud settings:
+### Cloud settings:
 
 - MongoDBSync.WebAPI\Properties\launchSettings.json
-
--- "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    - "applicationUrl": "https://localhost:5001;http://localhost:5000"
 
 - MongoDBSync.WebAPI\appsettings.json
+    - "RunSyncService": false
+    - "CloudUrl": "https://localhost:5001"
+    - "MongoDB:Name": "MongoDB1"
 
--- "RunSyncService": false
+### Client settings:
 
--- "CloudUrl": "https://localhost:5001"
-
-Client settings:
 - MongoDBSync.WebAPI\Properties\launchSettings.json
-
--- "applicationUrl": "https://localhost:5003;http://localhost:5002"
+    - "applicationUrl": "https://localhost:5003;http://localhost:5002"
 
 - MongoDBSync.WebAPI\appsettings.json
+    - "RunSyncService": true
+    - "CloudUrl": "https://localhost:5001"
+    - "MongoDB:Name": "MongoDB2"
 
--- "RunSyncService": true
 
--- "CloudUrl": "https://localhost:5001"
-
+### Start app
 
 To start application go to the project folder in cmd and run next command.
 
@@ -55,7 +54,7 @@ To start application go to the project folder in cmd and run next command.
 dotnet run
 ```
 
-It will start the application in a console mode. 
+It will start the application in the console mode. 
 
 ## How to use
 
@@ -68,20 +67,18 @@ By opening url: https://localhost:5001/api/user/getall , cloud will return all u
 
 ## Summary
 
-Pros:
--Full synchronization
+### Pros:
 
--Stable and scalable architecture
+- Full synchronization
+- Stable and scalable architecture
+- MongoDB
 
--MongoDB
 
+### Cons:
 
-Cons:
--Item should have 2 Ids
-
--Soft delete
-
--Command journal can be big, if synchronization process is not frequent.
+- Item should have 2 Ids
+- Soft delete
+- Command journal can be big, if synchronization process is not frequent.
 
 
 ## License
